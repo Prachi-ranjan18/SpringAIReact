@@ -1,6 +1,8 @@
 package com.decode.tinder.ai.backend;
 
-import org.bson.codecs.pojo.Conventions;
+import java.time.LocalDateTime;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -12,8 +14,7 @@ import com.decode.tinder.ai.backend.conversations.ConversationRepository;
 import com.decode.tinder.ai.backend.profiles.Gender;
 import com.decode.tinder.ai.backend.profiles.Profile;
 import com.decode.tinder.ai.backend.profiles.ProfileRepository;
-import java.time.LocalDateTime;
-import java.util.*;;
+;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner{
@@ -27,6 +28,8 @@ public class Application implements CommandLineRunner{
 		SpringApplication.run(Application.class, args);
 	}
 	public void run(String... args){
+		profileRepository.deleteAll();
+		conversationRepository.deleteAll();
 		//System.out.println("Welcome to my app");
 		Profile profile = new Profile(
 			"1", 
@@ -38,7 +41,19 @@ public class Application implements CommandLineRunner{
 			"Eat ,Code ,Sleep ", 
 			"pic1.jpg", 
 			"INTP");
+
+			Profile profile2 = new Profile(
+				"2", 
+				"Prachi", 
+				"Ranjan", 
+				20, 
+				"Indian", 
+				Gender.FEMALE,
+				"I like to code ", 
+				"pic1.jpg", 
+				"INTP");
 			profileRepository.save(profile);
+			profileRepository.save(profile2);
 			profileRepository.findAll().forEach(System.out :: println);
 			Conversation conversation = new Conversation(
 				"1", profile.id(), List.of(
