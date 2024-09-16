@@ -61,7 +61,7 @@ public class ConversationController {
         //TODO : Need to validate that the author of a messageText happens to be only the profile associated 
         //with the message user
         ChatMessages chatMessagesTime = new ChatMessages(
-            chatMessages.authorId(), chatMessages.messageText(), LocalDateTime.now()
+            chatMessages.messageText(), chatMessages.authorId() , LocalDateTime.now()
         );
         conversation.messages().add(chatMessagesTime);
         conversationRepository.save(conversation);
